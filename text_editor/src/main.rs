@@ -9,41 +9,26 @@ const FILL_CHAR:char = ' ';
 //structs
 
 fn main() {
-    let mut cursor: (u32, u32) = (0,0);
+    let mut cursor: u32 = 3;
     let mut screen = [[FILL_CHAR;X_SIZE];Y_SIZE];
 
-    loop {
+    //loop {
         print_screen(&mut screen,&cursor);
 
         let mut input: String = String::new();
         io::stdin().read_line(&mut input).expect("Failed to read line");
 
-        if input.trim() == "quit" {
-            break;
-        }
-
-        let input = input.trim().chars().next().unwrap();
-
-        screen[cursor.1 as usize][cursor.0 as usize] = input;
-
-        if cursor.0 < X_SIZE as u32 - 1 {
-            cursor.0 += 1;
-        } else {
-            cursor.0 = 0;
-            cursor.1 += 1;
-        }
-    }
+        let input = input.trim();
+    //}
 }
 
-fn print_screen(screen:&mut [[char;X_SIZE];Y_SIZE], cur:&(u32,u32)) {
-    screen[cur.1 as usize][cur.0 as usize] = '%';
-    
+fn print_screen(screen:&mut [[char;X_SIZE];Y_SIZE], cursor:&u32) {
     println!("{}{}{}","+---+","-".repeat(X_SIZE),'+');
 
-    let mut line:u32 = 1;
+    let mut line:u32 = 0;
 
     for row in screen {
-        print!("|{: >3}|",line);
+        print!("|{: >3}|",if line == cursor.to_owned() {"%%%".to_string()} else {line.to_string()});
         for col in row {
             print!("{}", col);
         }
