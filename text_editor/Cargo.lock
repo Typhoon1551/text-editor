@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "RAID_editor"
+name = "raid_editor"
 version = "0.1.0"
